@@ -1,57 +1,81 @@
-// FOR PLAYER 1
-var randomnumber1 = Math.floor(Math.random() * 6) + 1;
-console.log(randomnumber1);
+var noOfDrumButtons  = document.querySelectorAll(".drum").length;
 
-if (randomnumber1 ===  1) {
-  document.querySelector(".img1").setAttribute("src","images/dice1.png");
-}
-else if (randomnumber1 === 2) {
-  document.querySelector(".img1").setAttribute("src","images/dice2.png");
-}
-else if (randomnumber1 === 3) {
-  document.querySelector(".img1").setAttribute("src","images/dice3.png");
-}
-else if (randomnumber1 === 4) {
-  document.querySelector(".img1").setAttribute("src","images/dice4.png");
-}
-else if (randomnumber1 === 5) {
-  document.querySelector(".img1").setAttribute("src","images/dice5.png");
-}
-else if (randomnumber1 === 6) {
-  document.querySelector(".img1").setAttribute("src","images/dice6.png");
-}
-// ..............................................................................
+for (var i = 0; i<noOfDrumButtons;i++) {
+  document.querySelectorAll(".drum")[i].addEventListener("click", function (){
 
-var randomnumber2 = Math.floor(Math.random() * 6) + 1;
-console.log(randomnumber1);
+var buttonInnerHTML = this.innerHTML;
 
-if (randomnumber2 ===  1) {
-  document.querySelector(".img2").setAttribute("src","images/dice1.png");
-}
-else if (randomnumber2 === 2) {
-  document.querySelector(".img2").setAttribute("src","images/dice2.png");
-}
-else if (randomnumber2 === 3) {
-  document.querySelector(".img2").setAttribute("src","images/dice3.png");
-}
-else if (randomnumber2 === 4) {
-  document.querySelector(".img2").setAttribute("src","images/dice4.png");
-}
-else if (randomnumber2 === 5) {
-  document.querySelector(".img2").setAttribute("src","images/dice5.png");
-}
-else if (randomnumber2 === 6) {
-  document.querySelector(".img2").setAttribute("src","images/dice6.png");
+makeSound(buttonInnerHTML);
+
+buttonAnimation(buttonInnerHTML);
+  });
 }
 
-// Main Commands
-if (randomnumber1 > randomnumber2) {
-  document.querySelector("h1").innerHTML = ("Player 1 Won");
+
+document.addEventListener("keypress", function(event){
+
+makeSound(event.key);
+
+buttonAnimation(event.key);
+});
+
+
+function makeSound (key) {
+
+
+  switch (key) {
+    case "w":
+    var tom1 = new Audio("sounds/tom-1.mp3");
+    tom1.play();
+      break;
+
+      case "a" :
+      var tom2 = new Audio("sounds/tom-2.mp3");
+      tom2.play();
+      break;
+
+      case "s" :
+      var tom3 = new Audio("sounds/tom-3.mp3");
+      tom3.play();
+      break;
+
+      case "d":
+      var tom4 = new Audio("sounds/tom-4.mp3");
+      tom4.play();
+      break;
+
+      case "j" :
+      var snare = new Audio("sounds/snare.mp3");
+      snare.play();
+      break;
+
+      case "k" :
+      var crash = new Audio("sounds/crash.mp3");
+      crash.play();
+      break;
+
+      case "l" :
+      var kickbass = new Audio("sounds/kick-bass.mp3");
+      kickbass.play();
+      break;
+
+    default:
+    console.log(buttonInnerHTML);
+
+  }
+
+
 }
-else if (randomnumber1 === randomnumber2) {
-  document.querySelector("h1").innerHTML = ("It's A Tie!!!!");
-}
-else {
-  document.querySelector("h1").innerHTML = ("Player 2 Won");
+
+
+function buttonAnimation(currentKey) {
+
+var activeButton = document.querySelector("." + currentKey);
+
+activeButton.classList.add("pressed");
+
+setTimeout(function() {
+activeButton.classList.remove("pressed");
+}, 100);
 
 }
